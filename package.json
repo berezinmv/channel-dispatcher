@@ -1,0 +1,11 @@
+{
+  "name": "channel-dispatcher",
+  "version": "1.0.0",
+  "description": "Simple PubSub channels implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
+  "license": "ISC"
+}
