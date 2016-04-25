@@ -7,6 +7,10 @@
     "test": "mocha"
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/berezinmv/channel-dispatcher.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
