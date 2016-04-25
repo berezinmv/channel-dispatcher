@@ -1,4 +1,6 @@
 # channel-dispatcher
+[![Build Status](https://travis-ci.org/berezinmv/channel-dispatcher.svg?branch=master)](https://travis-ci.org/berezinmv/channel-dispatcher)
+
 A tiny channel subscribe/publish library.
 
 ### Basic usage
