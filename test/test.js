@@ -38,7 +38,7 @@ describe('channelDispatcher', function() {
       dispatcher.publish('test', 'success');
     });
 
-    it('calls subscribed callbacks with corrent context', function(done) {
+    it('calls subscribed callbacks with correct context', function(done) {
       var ident = dispatcher.subscribe('test', function() {
         assert.equal(this.value, "success");
         dispatcher.unsubscribe('test', ident);
