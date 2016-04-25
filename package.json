@@ -4,7 +4,8 @@
   "description": "Simple PubSub channels implementation",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npm run lint && mocha",
+    "lint": "jshint ./"
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
   "repository": {
