@@ -4,8 +4,9 @@
   "description": "Simple PubSub channels implementation",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && mocha",
-    "lint": "jshint ./"
+    "test": "npm run lint && npm run mocha",
+    "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
+    "mocha": "mocha"
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
   "repository": {
@@ -16,6 +17,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "jshint": "^2.9.2",
+    "jshint-stylish": "^2.1.0",
     "mocha": "^2.4.5"
   }
 }
