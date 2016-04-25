@@ -1,6 +1,5 @@
-#channel-dispatcher
-
-##A tiny channel subscribe/publish library.
+# channel-dispatcher
+A tiny channel subscribe/publish library.
 
 ### Basic usage
 
@@ -12,7 +11,7 @@ var dispatcher = require('channel-dispatcher');
 dispatcher.createChannel('test');
 
 // subscribe callback
-// ident is needed to unsubscribe callback later
+// ident is needed to unsubscribe later
 var ident = dispatcher.subscribe('test', function(data) {
   console.log(data);
 });
@@ -26,4 +25,33 @@ dispatcher.unsubscribe('test', ident);
 
 // destroy channel
 dispatcher.destroyChannel('test');
+```
+
+### Using standalone channel object
+
+```javascript
+// require library
+var dispatcher = require('channel-dispatcher');
+
+// create channel
+dispatcher.createChannel('test');
+
+// get channel object
+var channel = dispatcher.getChannel('test');
+
+// subscribe callback
+// ident is needed to unsubscribe later
+var ident = channel.subscribe(function(data) {
+  console.log(data);
+});
+
+// pass data to channel
+// in this case 'Hello to standalone channel' will be printed
+channel.publish('Hello to standalone channel');
+
+// unsubscribe callback from channel
+channel.unsubscribe(ident);
+
+// destroy channel
+channel.destroy();
 ```

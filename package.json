@@ -1,11 +1,21 @@
 {
   "name": "channel-dispatcher",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Simple PubSub channels implementation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint && mocha",
+    "lint": "jshint ./"
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/berezinmv/channel-dispatcher.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jshint": "^2.9.2",
+    "mocha": "^2.4.5"
+  }
 }
