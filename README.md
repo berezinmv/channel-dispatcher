@@ -3,7 +3,7 @@
 
 A tiny channel subscribe/publish library.
 
-### Basic usage
+### Basic usage.
 
 ```javascript
 // require library
@@ -29,7 +29,7 @@ dispatcher.unsubscribe('test', ident);
 dispatcher.destroyChannel('test');
 ```
 
-### Using standalone channel object
+### Using standalone channel object.
 
 ```javascript
 // require library
@@ -56,4 +56,11 @@ channel.unsubscribe(ident);
 
 // destroy channel
 channel.destroy();
+```
+
+### Show warnings
+Warnings is disabled by default.
+```javascript
+// show warnings
+dispatcher.setLogging(true);
 ```
