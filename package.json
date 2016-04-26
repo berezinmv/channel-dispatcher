@@ -1,7 +1,7 @@
 {
   "name": "channel-dispatcher",
-  "version": "1.0.1",
-  "description": "Simple PubSub channels implementation",
+  "version": "1.0.2",
+  "description": "A tiny channel subscribe/publish library.",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run mocha",
