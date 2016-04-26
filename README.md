@@ -1,5 +1,6 @@
 # channel-dispatcher
 [![Build Status](https://travis-ci.org/berezinmv/channel-dispatcher.svg?branch=master)](https://travis-ci.org/berezinmv/channel-dispatcher)
+[![Coverage Status](https://coveralls.io/repos/github/berezinmv/channel-dispatcher/badge.svg?branch=dev)](https://coveralls.io/github/berezinmv/channel-dispatcher?branch=master)
 
 A tiny channel subscribe/publish library.
 

@@ -1,12 +1,20 @@
 {
   "name": "channel-dispatcher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tiny channel subscribe/publish library.",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run mocha",
+    "test-travis": "npm run lint && npm run coverage",
+    "coverage": "istanbul cover _mocha -- -R spec ./test/*",
     "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
     "mocha": "mocha"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "lib",
+      "data-cover-never": "node_modules"
+    }
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
   "repository": {
@@ -16,6 +24,8 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.4.5"
