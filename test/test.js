@@ -2,13 +2,6 @@ var assert = require('chai').assert;
 var dispatcher = require('../');
 
 describe('channelDispatcher', function() {
-  beforeEach(function() {
-    if (dispatcher.channelExist('test')) {
-      dispatcher.destroyChannel('test');
-    }
-    return dispatcher.createChannel('test');
-  });
-
   describe('#subscribe()', function() {
     it('should return subscriber ident as a string value', function() {
       var callback = function() {};
