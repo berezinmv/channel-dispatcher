@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run mocha",
-    "test-ci": "npm run lint && NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha -r blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage": "istanbul cover _mocha -- -R spec ./test/*",
     "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
     "mocha": "mocha"
   },
   "config": {
     "blanket": {
-        "pattern": "lib",
-        "data-cover-never": "node_modules"
+      "pattern": "lib",
+      "data-cover-never": "node_modules"
     }
   },
   "author": "Maxim Berezin <berezin.mvdev@yahoo.com>",
@@ -22,12 +22,11 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "blanket": "^1.2.3",
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.1.0",
-    "mocha": "^2.4.5",
-    "mocha-lcov-reporter": "^1.2.0"
+    "mocha": "^2.4.5"
   }
 }
