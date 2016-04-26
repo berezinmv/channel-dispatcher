@@ -22,6 +22,15 @@ describe('channelDispatcher', function() {
   });
 
   describe('#unsubscribe()', function() {
+    it('should unsubscribe callback from channel', function(done) {
+      var ident = dispatcher.subscribe('test', function() {
+        done(); // this shouldn't be called
+      });
+      dispatcher.unsubscribe('test', ident);
+      dispatcher.publish('test', 'data');
+      done();
+    });
+
     it('shouldn\'t thow error with valid ident', function() {
       var ident = dispatcher.subscribe('test', function() {});
       dispatcher.unsubscribe('test', ident);
