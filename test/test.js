@@ -53,5 +53,17 @@ describe('channelDispatcher', function() {
       dispatcher.publish('test', 'success');
     });
 
+    it('shouldn\'t throw error if there is no subcribers', function() {
+      dispatcher.publish('test', "data");
+    });
+  });
+
+  describe('#getChannel', function() {
+    it('should return fully functional channel object', function() {
+      var channel = dispatcher.getChannel('test');
+      assert.equal(typeof channel.subscribe, 'function');
+      assert.equal(typeof channel.unsubscribe, 'function');
+      assert.equal(typeof channel.publish, 'function');
+    });
   });
 });
