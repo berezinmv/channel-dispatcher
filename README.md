@@ -46,6 +46,28 @@ channel.publish('Hello to standalone channel');
 channel.unsubscribe(ident);
 ```
 
+### Specifying context
+You can pass context along with callback
+```javascript
+// context object
+var context = {foo: "context data"};
+
+// callback
+var callback = function(bar) {
+  var foo = this.foo;
+  console.log(foo + " " + bar);
+};
+
+// subscribe callback with context
+dispatcher.subscribe('test', callback, context);
+// or using channel object
+// channel.subscribe(callback, context)
+
+// pass data
+// 'context data passed data' will be printed
+dispatcher.publish('test', "passed data");
+```
+
 ### Show warnings
 Warnings is disabled by default.
 ```javascript
