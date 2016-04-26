@@ -21,6 +21,19 @@ describe('channelDispatcher', function() {
     });
   });
 
+  describe('#unsubscribe()', function() {
+    it('shouldn\'t thow error with valid ident', function() {
+      var ident = dispatcher.subscribe('test', function() {});
+      dispatcher.unsubscribe('test', ident);
+    });
+
+    it('shouldn\'t thow error with invalid ident', function() {
+      dispatcher.unsubscribe('test', "ident");
+      dispatcher.unsubscribe('test', 123);
+      dispatcher.unsubscribe('test', null);
+    });
+  });
+
   describe('#publish()', function() {
     it('calls subscribed callbacks with passed data', function(done) {
       var ident = dispatcher.subscribe('test', function(data) {
