@@ -2,13 +2,6 @@ var assert = require('chai').assert;
 var dispatcher = require('../');
 
 describe('channelDispatcher', function() {
-  beforeEach(function() {
-    if (dispatcher.channelExist('test')) {
-      dispatcher.destroyChannel('test');
-    }
-    return dispatcher.createChannel('test');
-  });
-
   describe('#subscribe()', function() {
     it('should return subscriber ident as a string value', function() {
       var callback = function() {};
@@ -28,6 +21,19 @@ describe('channelDispatcher', function() {
     });
   });
 
+  describe('#unsubscribe()', function() {
+    it('shouldn\'t thow error with valid ident', function() {
+      var ident = dispatcher.subscribe('test', function() {});
+      dispatcher.unsubscribe('test', ident);
+    });
+
+    it('shouldn\'t thow error with invalid ident', function() {
+      dispatcher.unsubscribe('test', "ident");
+      dispatcher.unsubscribe('test', 123);
+      dispatcher.unsubscribe('test', null);
+    });
+  });
+
   describe('#publish()', function() {
     it('calls subscribed callbacks with passed data', function(done) {
       var ident = dispatcher.subscribe('test', function(data) {
@@ -38,7 +44,7 @@ describe('channelDispatcher', function() {
       dispatcher.publish('test', 'success');
     });
 
-    it('calls subscribed callbacks with corrent context', function(done) {
+    it('calls subscribed callbacks with correct context', function(done) {
       var ident = dispatcher.subscribe('test', function() {
         assert.equal(this.value, "success");
         dispatcher.unsubscribe('test', ident);
@@ -47,5 +53,17 @@ describe('channelDispatcher', function() {
       dispatcher.publish('test', 'success');
     });
 
+    it('shouldn\'t throw error if there is no subcribers', function() {
+      dispatcher.publish('test', "data");
+    });
+  });
+
+  describe('#getChannel', function() {
+    it('should return fully functional channel object', function() {
+      var channel = dispatcher.getChannel('test');
+      assert.equal(typeof channel.subscribe, 'function');
+      assert.equal(typeof channel.unsubscribe, 'function');
+      assert.equal(typeof channel.publish, 'function');
+    });
   });
 });

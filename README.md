@@ -9,9 +9,6 @@ A tiny channel subscribe/publish library.
 // require library
 var dispatcher = require('channel-dispatcher');
 
-// create channel
-dispatcher.createChannel('test');
-
 // subscribe callback
 // ident is needed to unsubscribe later
 var ident = dispatcher.subscribe('test', function(data) {
@@ -24,9 +21,6 @@ dispatcher.publish('test', 'Hello to channel');
 
 // unsubscribe callback from channel
 dispatcher.unsubscribe('test', ident);
-
-// destroy channel
-dispatcher.destroyChannel('test');
 ```
 
 ### Using standalone channel object.
@@ -34,9 +28,6 @@ dispatcher.destroyChannel('test');
 ```javascript
 // require library
 var dispatcher = require('channel-dispatcher');
-
-// create channel
-dispatcher.createChannel('test');
 
 // get channel object
 var channel = dispatcher.getChannel('test');
@@ -53,9 +44,6 @@ channel.publish('Hello to standalone channel');
 
 // unsubscribe callback from channel
 channel.unsubscribe(ident);
-
-// destroy channel
-channel.destroy();
 ```
 
 ### Show warnings
