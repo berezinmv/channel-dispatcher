@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run mocha",
+    "test-travis": "npm run lint && npm run coverage",
     "coverage": "istanbul cover _mocha -- -R spec ./test/*",
     "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
     "mocha": "mocha"

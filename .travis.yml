@@ -3,7 +3,7 @@ node_js:
 - '5'
 
 script:
-  - npm run test-ci
+  - npm run test-travis
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
