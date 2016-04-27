@@ -157,4 +157,33 @@ describe('channelDispatcher', function() {
       });
     });
   });
+
+  describe('#setLogging()', function() {
+    it('shouldn\'t throw an error with any arguments', function() {
+      dispatcher.setLogging(true);
+      dispatcher.setLogging(null);
+      dispatcher.setLogging(0);
+      dispatcher.setLogging('text');
+      dispatcher.setLogging(false);
+    });
+  });
+
+  describe('#getLogging()', function() {
+    it('should always return boolean value', function() {
+      dispatcher.setLogging(true);
+      assert(typeof dispatcher.getLogging() === 'boolean');
+
+      dispatcher.setLogging(null);
+      assert(typeof dispatcher.getLogging() === 'boolean');
+
+      dispatcher.setLogging(0);
+      assert(typeof dispatcher.getLogging() === 'boolean');
+
+      dispatcher.setLogging('text');
+      assert(typeof dispatcher.getLogging() === 'boolean');
+
+      dispatcher.setLogging(false);
+      assert(typeof dispatcher.getLogging() === 'boolean');
+    });
+  });
 });
