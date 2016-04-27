@@ -3,6 +3,18 @@ var dispatcher = require('../');
 
 describe('channelDispatcher', function() {
   describe('#subscribe()', function() {
+    it('should return unique idents', function() {
+      var ident1 = dispatcher.subscribe('test', function() {});
+      var ident2 = dispatcher.subscribe('test', function() {});
+      var ident3 = dispatcher.subscribe('test', function() {});
+      assert(ident1 !== ident2);
+      assert(ident2 !== ident3);
+      assert(ident1 !== ident3);
+      dispatcher.unsubscribe('test', ident1);
+      dispatcher.unsubscribe('test', ident2);
+      dispatcher.unsubscribe('test', ident3);
+    });
+
     it('should return subscriber ident as a string value', function() {
       var callback = function() {};
       var ident = dispatcher.subscribe('test', callback);
@@ -86,6 +98,18 @@ describe('channelDispatcher', function() {
       var channel = dispatcher.getChannel('test');
 
       describe('#subscribe()', function() {
+        it('should return unique idents', function() {
+          var ident1 = channel.subscribe(function() {});
+          var ident2 = channel.subscribe(function() {});
+          var ident3 = channel.subscribe(function() {});
+          assert(ident1 !== ident2);
+          assert(ident2 !== ident3);
+          assert(ident1 !== ident3);
+          channel.unsubscribe(ident1);
+          channel.unsubscribe(ident2);
+          channel.unsubscribe(ident3);
+        });
+
         it('should return subscriber ident as a string value', function() {
           var ident = channel.subscribe(function() {});
           assert(typeof ident === 'string');
@@ -95,8 +119,8 @@ describe('channelDispatcher', function() {
         it('should return undefined when callback is not a function', function() {
           // subscribe
           var ident1 = channel.subscribe(null);
-          var ident2 = channel.subscribe(null);
-          var ident3 = channel.subscribe(null);
+          var ident2 = channel.subscribe(0);
+          var ident3 = channel.subscribe({});
 
           // check
           assert(typeof ident1 === 'undefined');
