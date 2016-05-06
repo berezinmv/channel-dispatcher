@@ -11,5 +11,8 @@
   "undef": true,
   "unused": true,
   "browser": true,
-  "node": true
+  "node": true,
+  "globals": {
+    "define": false
+  }
 }
