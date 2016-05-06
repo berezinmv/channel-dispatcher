@@ -1,7 +1,7 @@
 {
   "name": "channel-dispatcher",
   "description": "A tiny channel subscribe/publish library.",
-  "main": "index.js",
+  "main": "lib/dispatcher.js",
   "authors": [
     "Maxim Berezin <berezin.mvdev@yahoo.com>"
   ],
