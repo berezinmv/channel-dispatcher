@@ -1,0 +1,17 @@
+{
+  "name": "channel-dispatcher",
+  "description": "A tiny channel subscribe/publish library.",
+  "main": "index.js",
+  "authors": [
+    "Maxim Berezin <berezin.mvdev@yahoo.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/berezinmv/channel-dispatcher",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
