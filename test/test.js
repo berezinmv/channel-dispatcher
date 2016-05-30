@@ -4,78 +4,62 @@ var dispatcher = require('../');
 describe('channelDispatcher', function() {
   describe('#subscribe()', function() {
     it('should return unique idents', function() {
-      var ident1 = dispatcher.subscribe('test', function() {});
-      var ident2 = dispatcher.subscribe('test', function() {});
-      var ident3 = dispatcher.subscribe('test', function() {});
-      assert(ident1 !== ident2);
-      assert(ident2 !== ident3);
-      assert(ident1 !== ident3);
-      dispatcher.unsubscribe('test', ident1);
-      dispatcher.unsubscribe('test', ident2);
-      dispatcher.unsubscribe('test', ident3);
+      var sub1 = dispatcher.subscribe('test', function() {});
+      var sub2 = dispatcher.subscribe('test', function() {});
+      var sub3 = dispatcher.subscribe('test', function() {});
+      assert(sub1.ident !== sub2.ident);
+      assert(sub2.ident !== sub3.ident);
+      assert(sub1.ident !== sub3.ident);
+      sub1.unsubscribe();
+      sub2.unsubscribe();
+      sub3.unsubscribe();
     });
 
-    it('should return subscriber ident as a string value', function() {
+    it('should return subscriber as object', function() {
       var callback = function() {};
-      var ident = dispatcher.subscribe('test', callback);
-      assert(typeof ident === 'string');
-      dispatcher.unsubscribe('test', ident);
+      var sub = dispatcher.subscribe('test', callback);
+      assert(typeof sub === 'object');
+      sub.unsubscribe();
     });
 
     it('should return undefined when callback is not a function', function() {
       // subscribe
-      var ident1 = dispatcher.subscribe('test', null);
-      var ident2 = dispatcher.subscribe('test', 0);
-      var ident3 = dispatcher.subscribe('test', {});
+      var sub1 = dispatcher.subscribe('test', null);
+      var sub2 = dispatcher.subscribe('test', 0);
+      var sub3 = dispatcher.subscribe('test', {});
 
       // check
-      assert(typeof ident1 === 'undefined');
-      assert(typeof ident2 === 'undefined');
-      assert(typeof ident3 === 'undefined');
-
-      // unsubscribe
-      dispatcher.unsubscribe('test', ident1);
-      dispatcher.unsubscribe('test', ident2);
-      dispatcher.unsubscribe('test', ident3);
+      assert(typeof sub1 === 'undefined');
+      assert(typeof sub2 === 'undefined');
+      assert(typeof sub3 === 'undefined');
     });
   });
 
   describe('#unsubscribe()', function() {
     it('should unsubscribe callback from channel', function(done) {
-      var ident = dispatcher.subscribe('test', function() {
+      var sub = dispatcher.subscribe('test', function() {
         done(); // this shouldn't be called
       });
-      dispatcher.unsubscribe('test', ident);
+      sub.unsubscribe();
       dispatcher.publish('test', 'data');
       done();
-    });
-
-    it('shouldn\'t thow error with valid ident', function() {
-      var ident = dispatcher.subscribe('test', function() {});
-      dispatcher.unsubscribe('test', ident);
-    });
-
-    it('shouldn\'t thow error with invalid ident', function() {
-      dispatcher.unsubscribe('test', 'ident');
-      dispatcher.unsubscribe('test', 123);
-      dispatcher.unsubscribe('test', null);
     });
   });
 
   describe('#publish()', function() {
     it('calls subscribed callbacks with passed data', function(done) {
-      var ident = dispatcher.subscribe('test', function(data) {
+      var sub = dispatcher.subscribe('test', function(data) {
         assert.equal(data, 'success');
-        dispatcher.unsubscribe('test', ident);
+        sub.unsubscribe();
         done();
       });
       dispatcher.publish('test', 'success');
     });
 
     it('calls subscribed callbacks with correct context', function(done) {
-      var ident = dispatcher.subscribe('test', function() {
+      var sub = dispatcher.subscribe('test', function() {
         assert.equal(this.value, 'success');
-        dispatcher.unsubscribe('test', ident);
+        sub.unsubscribe();
         done();
       }, {value: 'success'});
       dispatcher.publish('test', 'success');
@@ -90,7 +74,6 @@ describe('channelDispatcher', function() {
     it('should return fully formed channel object', function() {
       var channel = dispatcher.getChannel('test');
       assert.equal(typeof channel.subscribe, 'function');
-      assert.equal(typeof channel.unsubscribe, 'function');
       assert.equal(typeof channel.publish, 'function');
     });
 
@@ -99,77 +82,61 @@ describe('channelDispatcher', function() {
 
       describe('#subscribe()', function() {
         it('should return unique idents', function() {
-          var ident1 = channel.subscribe(function() {});
-          var ident2 = channel.subscribe(function() {});
-          var ident3 = channel.subscribe(function() {});
-          assert(ident1 !== ident2);
-          assert(ident2 !== ident3);
-          assert(ident1 !== ident3);
-          channel.unsubscribe(ident1);
-          channel.unsubscribe(ident2);
-          channel.unsubscribe(ident3);
+          var sub1 = channel.subscribe(function() {});
+          var sub2 = channel.subscribe(function() {});
+          var sub3 = channel.subscribe(function() {});
+          assert(sub1.ident !== sub2.ident);
+          assert(sub1.ident !== sub3.ident);
+          assert(sub2.ident !== sub3.ident);
+          sub1.unsubscribe();
+          sub2.unsubscribe();
+          sub3.unsubscribe();
         });
 
-        it('should return subscriber ident as a string value', function() {
-          var ident = channel.subscribe(function() {});
-          assert(typeof ident === 'string');
-          channel.unsubscribe(ident);
+        it('should return subscriber as object', function() {
+          var sub = channel.subscribe(function() {});
+          assert(typeof sub === 'object');
+          sub.unsubscribe();
         });
 
         it('should return undefined when callback is not a function', function() {
           // subscribe
-          var ident1 = channel.subscribe(null);
-          var ident2 = channel.subscribe(0);
-          var ident3 = channel.subscribe({});
+          var sub1 = channel.subscribe(null);
+          var sub2 = channel.subscribe(0);
+          var sub3 = channel.subscribe({});
 
           // check
-          assert(typeof ident1 === 'undefined');
-          assert(typeof ident2 === 'undefined');
-          assert(typeof ident3 === 'undefined');
-
-          //unsubscribe
-          channel.unsubscribe(ident1);
-          channel.unsubscribe(ident2);
-          channel.unsubscribe(ident3);
+          assert(typeof sub1 === 'undefined');
+          assert(typeof sub2 === 'undefined');
+          assert(typeof sub3 === 'undefined');
         });
       });
 
       describe('#unsubscribe()', function() {
         it('should unsubscribe callback from channel', function(done) {
-          var ident = channel.subscribe(function() {
+          var sub = channel.subscribe(function() {
             done(); // this shouldn't be called
           });
-          channel.unsubscribe(ident);
+          sub.unsubscribe();
           channel.publish('data');
           done();
-        });
-
-        it('shouldn\'t thow error with valid ident', function() {
-          var ident = channel.subscribe(function() {});
-          channel.unsubscribe(ident);
-        });
-
-        it('shouldn\'t thow error with invalid ident', function() {
-          channel.unsubscribe('ident');
-          channel.unsubscribe(123);
-          channel.unsubscribe(null);
         });
       });
 
       describe('#publish()', function() {
         it('calls subscribed callbacks with passed data', function(done) {
-          var ident = channel.subscribe(function(data) {
+          var sub = channel.subscribe(function(data) {
             assert.equal(data, 'success');
-            channel.unsubscribe(ident);
+            sub.unsubscribe();
             done();
           });
           channel.publish('success');
         });
 
         it('calls subscribed callbacks with correct context', function(done) {
-          var ident = channel.subscribe(function() {
+          var sub = channel.subscribe(function() {
             assert.equal(this.value, 'success');
-            channel.unsubscribe(ident);
+            sub.unsubscribe();
             done();
           }, {value: 'success'});
           channel.publish('success');

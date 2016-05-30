@@ -11,8 +11,8 @@ A tiny channel subscribe/publish library.
 var dispatcher = require('channel-dispatcher');
 
 // subscribe callback
-// ident is needed to unsubscribe later
-var ident = dispatcher.subscribe('test', function(data) {
+// sub is needed to unsubscribe later
+var sub = dispatcher.subscribe('test', function(data) {
   console.log(data);
 });
 
@@ -21,7 +21,7 @@ var ident = dispatcher.subscribe('test', function(data) {
 dispatcher.publish('test', 'Hello to channel');
 
 // unsubscribe callback from channel
-dispatcher.unsubscribe('test', ident);
+sub.unsubscribe();
 ```
 
 ### Using standalone channel object.
@@ -34,8 +34,8 @@ var dispatcher = require('channel-dispatcher');
 var channel = dispatcher.getChannel('test');
 
 // subscribe callback
-// ident is needed to unsubscribe later
-var ident = channel.subscribe(function(data) {
+// sub is needed to unsubscribe later
+var sub = channel.subscribe(function(data) {
   console.log(data);
 });
 
@@ -44,7 +44,7 @@ var ident = channel.subscribe(function(data) {
 channel.publish('Hello to standalone channel');
 
 // unsubscribe callback from channel
-channel.unsubscribe(ident);
+sub.unsubscribe();
 ```
 
 ### Specifying context
