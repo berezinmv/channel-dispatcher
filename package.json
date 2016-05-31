@@ -1,6 +1,6 @@
 {
   "name": "channel-dispatcher",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A tiny channel subscribe/publish library.",
   "main": "index.js",
   "scripts": {
