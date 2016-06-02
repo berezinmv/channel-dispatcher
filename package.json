@@ -1,6 +1,6 @@
 {
   "name": "channel-dispatcher",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A tiny channel subscribe/publish library.",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "type": "git",
     "url": "https://github.com/berezinmv/channel-dispatcher.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
