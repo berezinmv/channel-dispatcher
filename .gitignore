@@ -3,3 +3,5 @@ npm-debug.log
 
 coverage/
 out
+
+lib/dispatcher.min.js

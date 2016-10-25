@@ -1,6 +1,6 @@
 {
   "name": "channel-dispatcher",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A tiny channel subscribe/publish library.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "test-travis": "npm run lint && npm run coverage",
     "coverage": "istanbul cover _mocha -- -R spec ./test/*",
     "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
-    "mocha": "mocha"
+    "mocha": "mocha",
+    "uglify": "uglifyjs ./lib/dispatcher.js -mt -o ./lib/dispatcher.min.js"
   },
   "config": {
     "blanket": {
@@ -28,6 +29,7 @@
     "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.1.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "uglify-js": "^2.7.4"
   }
 }
