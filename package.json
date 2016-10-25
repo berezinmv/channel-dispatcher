@@ -8,7 +8,8 @@
     "test-travis": "npm run lint && npm run coverage",
     "coverage": "istanbul cover _mocha -- -R spec ./test/*",
     "lint": "jshint ./ --reporter=node_modules/jshint-stylish",
-    "mocha": "mocha"
+    "mocha": "mocha",
+    "uglify": "uglifyjs ./lib/dispatcher.js -mt -o ./lib/dispatcher.min.js"
   },
   "config": {
     "blanket": {
